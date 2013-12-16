@@ -1,10 +1,10 @@
 # PxLoader
-========================
+	
 // TypeScript port of PxLoader lib and PxLoaderImage plugin
 // Project: http://thinkpixellab.com/pxloader/
 // Github: https://github.com/proti/PxLoader-typescript-port
 
-/*
+
     Copyright (c) 2013 Mariusz Protasewicz
     version: 0.1 alpha
     
@@ -22,7 +22,7 @@
 	This port, is inspired originally from JavaScript PxLoader lib and PxLoaderImage plugin by Pixel Labs.
 
 	Will need some refactoring and updates. 
-*/
+
 
 ## Usage
 
