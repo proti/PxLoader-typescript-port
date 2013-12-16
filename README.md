@@ -5,11 +5,9 @@
 * Github: https://github.com/proti/PxLoader-typescript-port
 
 
-Copyright (c) 2013 Mariusz Protasewicz
-version: 0.1 alpha
+Copyright (c) 2013 Mariusz Protasewiczversion: 0.1 alpha
     
 PxLoader, PxLoaderImage plugin for TypeScript
--------------------------
 Release Date: 16/12/2013
 Platform: TypeScript
 Version: 0
