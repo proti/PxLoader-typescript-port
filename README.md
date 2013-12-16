@@ -1,5 +1,5 @@
-# PxLoader
-	
+# PxLoader for TypeScript
+================================
 * TypeScript port of PxLoader lib and PxLoaderImage plugin
 * Project: http://thinkpixellab.com/pxloader
 * Github: https://github.com/proti/PxLoader-typescript-port
@@ -9,13 +9,12 @@ Copyright (c) 2013 Mariusz Protasewicz
 version: 0.1 alpha
     
 PxLoader, PxLoaderImage plugin for TypeScript
---------------------------------------------------------------------------------------
+-------------------------
 Release Date: 16/12/2013
 Platform: TypeScript
 Version: 0
 Revision: 1
 Author: Mariusz Protasewicz
---------------------------------------------------------------------------------------
 
 0.1 - PxLoader, PxLoader plugin TypeScript Standard port.
 
@@ -30,22 +29,20 @@ This is the alpha version and need some refactoring, updates and tests.
 ///<reference path="PxLoader.ts"/>
 class Preload
 {
-	private loader : px.PxLoader;
-	
 	constructor()
 	{
-		var baseUrl = 'http://thinkpixellab.com/pxloader' + 
+		var baseUrl : string = 'http://thinkpixellab.com/pxloader' + 
         '/slowImage.php?delay=1&time=' + new Date,
         
-		this.loader = new px.PxLoader();
+		var loader : px.PxLoader = new px.PxLoader();
 		
 		for(var i=0; i < 100; i++)
         {
             var pxImage = new px.PxLoaderImage(baseUrl + '&i=' + i);
-            this.loader.add(pxImage);
+            loader.add(pxImage);
            
-           	this.loader.addProgressListener(this.onProgress);
-       		this.loader.addCompletionListener(this.onComplete);
+           	loader.addProgressListener(this.onProgress);
+       		loader.addCompletionListener(this.onComplete);
         }
 	}
 	
