@@ -1,28 +1,25 @@
-# PxLoader for TypeScript
+# PxLoader for TypeScript  
+#####version: 0.1 alpha
 ================================
 * TypeScript port of PxLoader lib and PxLoaderImage plugin
 * Project: http://thinkpixellab.com/pxloader
 * Github: https://github.com/proti/PxLoader-typescript-port
 
 
-Copyright (c) 2013 Mariusz Protasewiczversion: 0.1 alpha
-    
-PxLoader, PxLoaderImage plugin for TypeScript
-Release Date: 16/12/2013
-Platform: TypeScript
-Version: 0
-Revision: 1
-Author: Mariusz Protasewicz
+Copyright (c) 2013 Mariusz Protasewicz  
+ 
 
-0.1 - PxLoader, PxLoader plugin TypeScript Standard port.
+PxLoader, PxLoaderImage plugin for TypeScript  
+Release Date: 16/12/2013  
+Platform: TypeScript  
 
 This port, is inspired originally from JavaScript PxLoader and PxLoaderImage plugin 
 by Pixel Labs.
 
-This is the alpha version and need some refactoring, updates and tests.
+This is the initial alpha version and need some refactoring, updates and tests.
 
 
-### Usage
+#### Usage
 ```
 ///<reference path="PxLoader.ts"/>
 class Preload
@@ -36,7 +33,7 @@ class Preload
 		
 		for(var i=0; i < 100; i++)
         {
-            var pxImage = new px.PxLoaderImage(baseUrl + '&i=' + i);
+            var pxImage : px.PxLoaderImage = new px.PxLoaderImage(baseUrl + '&i=' + i);
             loader.add(pxImage);
            
            	loader.addProgressListener(this.onProgress);
