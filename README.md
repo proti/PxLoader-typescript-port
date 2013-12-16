@@ -1,6 +1,6 @@
 # PxLoader for TypeScript  
 #####version: 0.1 alpha
-================================
+---
 * TypeScript port of PxLoader lib and PxLoaderImage plugin
 * Project: http://thinkpixellab.com/pxloader
 * Github: https://github.com/proti/PxLoader-typescript-port
@@ -20,7 +20,7 @@ This is the initial alpha version and need some refactoring, updates and tests.
 
 
 #### Usage
-```
+```typescript
 ///<reference path="PxLoader.ts"/>
 class Preload
 {
@@ -31,7 +31,7 @@ class Preload
         
 		var loader : px.PxLoader = new px.PxLoader();
 		
-		for(var i=0; i < 100; i++)
+		for(var i : number = 0; i < 100; i++)
         {
             var pxImage : px.PxLoaderImage = new px.PxLoaderImage(baseUrl + '&i=' + i);
             loader.add(pxImage);
@@ -43,7 +43,7 @@ class Preload
 	
 	public onProgress = (e) : void =>
     {
-            console.log(e.completedCount / e.totalCount);
+            console.log("items loaded: " + (e.completedCount / e.totalCount));
     }
 
     public onComplete = (e) : void =>
