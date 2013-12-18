@@ -1,10 +1,11 @@
-// TypeScript port of PxLoader lib and PxLoaderImage plugin
+// TypeScript port of PxLoader lib, PxLoaderImage, PxLoaderJSON plugins
 // Project: http://thinkpixellab.com/pxloader/
+// JavaScript version PxLoaderJSON: https://gist.github.com/tdreyno/3605248 by Thomas Reynolds
 // Github: https://github.com/proti/PxLoader-typescript-port
 
 /*
     Copyright (c) 2013 Mariusz Protasewicz
-    version: 0.1 alpha
+    version: 0.2 alpha
     
     The MIT License
 
@@ -188,7 +189,7 @@ module px
             })
         }
 
-        public start(orderedTags) : void
+        public start(orderedTags : Array = null) : void
         {
             this.timeStarted = Date.now();
 
@@ -461,7 +462,7 @@ module px
         public url : string;
         public loader : PxLoader = null;
 
-        constructor(url, tags : PxLoaderTags = null , priority : number = null)
+        constructor(url : string, tags : PxLoaderTags = null , priority : number = null)
         {
             this.url = url;
             this.img = new Image();
@@ -469,7 +470,7 @@ module px
             this.priority = priority;
         }
 
-        public start(pxLoader) : void
+        public start(pxLoader : PxLoader) : void
         {
             // we need the loader ref so we can notify upon completion
             this.loader = pxLoader;
@@ -558,13 +559,97 @@ module px
             }
         }
 
-        public addImage(url, tags, priority)
+        public addImage(url : string, tags : PxLoaderTags, priority : number) : HTMLImageElement
         {
-            var imageLoader = new PxLoaderImage(url, tags, priority);
+            var imageLoader : PxLoaderImage = new PxLoaderImage(url, tags, priority);
             this.loader.add(imageLoader);
 
             // return the img element to the caller
             return imageLoader.img;
+        }
+    }
+
+    export class PxLoaderJSON
+    {
+        public loader : PxLoader;
+        public url : string;
+        public complete : Boolean = false;
+        public tags : PxLoaderTags;
+        public priority : number;
+        public xhr : XMLHttpRequest;
+        public data : any;
+
+        constructor(url : string, tags : PxLoaderTags = null, priority : number = null)
+        {
+            this.url = url;
+            this.tags = tags;
+            this.priority = priority;
+            this.data = null;
+
+        }
+
+        public start(pxLoader : PxLoader) : void
+        {
+            this.loader = pxLoader;
+
+            this.xhr = new XMLHttpRequest();
+            this.xhr.open("GET", this.url, false);
+            this.xhr.onreadystatechange = this.onXHRReadyStateChange;
+            this.xhr.send(null);
+        }
+
+        private onXHRReadyStateChange = () : void =>
+        {
+            if (this.xhr['readyState'] !== 4) { return; }
+            if (this.xhr['status'] !== 200) {
+                this.loader.onError(this);
+                return;
+            }
+
+            var serverResponse : string = this.xhr['responseText'];
+            //console.log(serverResponse);
+            try {
+                this.data = JSON.parse(serverResponse);
+                this.loader.onLoad(this);
+            } catch (e) {
+                this.loader.onError(this);
+            }
+        }
+
+        public checkStatus = () : void =>
+        {
+            if (this.complete) {
+                this.loader.onLoad(this);
+            }
+        }
+
+        // called by PxLoader when it is no longer waiting
+        public onTimeout = () : void =>
+        {
+            if (this.complete) {
+                this.loader.onLoad(this);
+            } else {
+                this.loader.onTimeout(this);
+            }
+        }
+
+        // returns a name for the resource that can be used in logging
+        public getURL() : string
+        {
+            return this.url;
+        }
+
+        public getData()
+        {
+            return this.data;
+        }
+
+        public addJSON(url : string, tags : PxLoaderTags, priority : number) : string
+        {
+            var jsonLoader : PxLoaderJSON = new PxLoaderJSON(url, tags, priority);
+            this.loader.add(jsonLoader);
+
+            return jsonLoader.url;
         }
     }
 }
