@@ -1,20 +1,22 @@
 # PxLoader for TypeScript  
-#####version: 0.1 alpha
+#####version: 0.2 alpha
 ---
-* TypeScript port of PxLoader lib and PxLoaderImage plugin
+* TypeScript port of PxLoader lib, PxLoaderImage, PxLoaderJSON plugins
 * Project: http://thinkpixellab.com/pxloader
+* JavaScript version of PxLoaderJSON plugin: https://gist.github.com/tdreyno/3605248 by Thomas Reynolds
 * Github: https://github.com/proti/PxLoader-typescript-port
 
 
 Copyright (c) 2013 Mariusz Protasewicz  
  
 
-PxLoader, PxLoaderImage plugin for TypeScript  
+PxLoader, PxLoaderImage, PxLoaderJSON plugins for TypeScript  
 Release Date: 16/12/2013  
 Platform: TypeScript  
 
-This port, is inspired originally from JavaScript PxLoader and PxLoaderImage plugin 
-by Pixel Labs.
+This port, is inspired originally from JavaScript:
+- PxLoader and PxLoaderImage plugin by Pixel Labs.
+- PxLoaderJSON by Thomas Reynolds
 
 This is the initial alpha version and need some refactoring, updates and tests.
 
